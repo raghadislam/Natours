@@ -18,7 +18,6 @@ exports.getAllTours = async (req, res) => {
     execludeFields.forEach(
       (el) => delete queryObj[el],
     );
-    console.log(req.query, queryObj);
 
     // Advanced Filtering
     let queryStr = JSON.stringify(queryObj);
@@ -27,7 +26,6 @@ exports.getAllTours = async (req, res) => {
       /\b(gte|gt|lte|lt)\b/g,
       (match) => `$${match}`,
     );
-    console.log(JSON.parse(queryStr));
 
     let query = Tour.find(JSON.parse(queryStr));
 
@@ -40,7 +38,34 @@ exports.getAllTours = async (req, res) => {
       query = query.sort(sortBy);
     } else {
       // adding a default sorting
-      query = query.sort('-createdAt');
+      query = query.sort('createdAt _id');
+    }
+
+    // 3) Field Limiting
+    if (req.query.fields) {
+      const fields = req.query.fields
+        .split(',')
+        .join(' ');
+
+      query = query.select(fields);
+    } else {
+      query.select('-__v'); // the - means execluding this argument
+    }
+
+    // 4) Pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const toursNum =
+        await Tour.countDocuments();
+      if (skip >= toursNum)
+        throw new Error(
+          'This page does not exist',
+        );
     }
 
     // EXECUTE THE QUERY
