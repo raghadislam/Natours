@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js"
+    "start:prod:linux": "NODE_ENV=production nodemon server.js",
+    "start:prod:windows": "NODE_ENV=production&&nodemon server.js"
   },
   "author": "Raghad Noser",
   "license": "ISC",

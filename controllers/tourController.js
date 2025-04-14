@@ -1,17 +1,52 @@
-//const Mongoose = require('mongoose');
 const Tour = require('../models/tourModel');
-
-// Tour.call();
-
-// const tours = JSON.parse(
-//   fs.readFileSync(
-//     `${__dirname}/../dev-data/data/tours-simple.json`,
-//   ),
-// );
 
 exports.getAllTours = async (req, res) => {
   try {
-    const allTours = await Tour.find();
+    // BUILD A QUERY
+    // 1) Filtering
+
+    // making shallow copy and not a hard copy
+    const queryObj = { ...req.query };
+
+    // these are exluded because are not queries, they have a special functionality
+    const execludeFields = [
+      'page',
+      'sort',
+      'limit',
+      'fields',
+    ];
+    execludeFields.forEach(
+      (el) => delete queryObj[el],
+    );
+    console.log(req.query, queryObj);
+
+    // Advanced Filtering
+    let queryStr = JSON.stringify(queryObj);
+
+    queryStr = queryStr.replace(
+      /\b(gte|gt|lte|lt)\b/g,
+      (match) => `$${match}`,
+    );
+    console.log(JSON.parse(queryStr));
+
+    let query = Tour.find(JSON.parse(queryStr));
+
+    // 2) Sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort
+        .split(',')
+        .join(' ');
+
+      query = query.sort(sortBy);
+    } else {
+      // adding a default sorting
+      query = query.sort('-createdAt');
+    }
+
+    // EXECUTE THE QUERY
+    const allTours = await query;
+
+    // SEND RESPONSE
     res.status(200).json({
       status: 'success',
       results: allTours.length,
@@ -69,7 +104,7 @@ exports.updateTour = async (req, res) => {
       req.body,
       {
         new: true, // return the updated and not the original
-        runValidators: true, // the validators (type validators fir example), runs again after updating
+        runValidators: true, // the validators (type validators for example), runs again after updating
       },
     );
     res.status(200).json({
