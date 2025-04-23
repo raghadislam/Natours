@@ -1,4 +1,4 @@
-// this file is for application setup
+// This File is for Application Setup
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
@@ -11,7 +11,7 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD,
 );
 
-/* connect to the database */
+// Connect to the Database
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -21,7 +21,7 @@ mongoose
   })
   .then(() => console.log('DB conneted!'));
 
-// start the server
+// Start the Server
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

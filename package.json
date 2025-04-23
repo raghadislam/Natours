@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "start:prod:linux": "NODE_ENV=production nodemon server.js",
-    "start:prod:windows": "NODE_ENV=production&&nodemon server.js"
+    "start:prod:windows": "NODE_ENV=production&&nodemon server.js",
+    "debug": "node --inspect server.js"
   },
   "author": "Raghad Noser",
   "license": "ISC",
@@ -15,7 +16,9 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^5.13.23",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "slugify": "^1.6.6",
+    "validator": "^13.15.0"
   },
   "devDependencies": {
     "eslint": "^8.57.1",
