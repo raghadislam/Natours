@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-const validator = require('validator');
+// const validator = require('validator');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -9,14 +9,8 @@ const tourSchema = new mongoose.Schema(
       required: [true, 'A tour must have a name'],
       unique: true,
       trim: true,
-      maxlength: [
-        40,
-        'A tour name must have at most 40 characters',
-      ],
-      minlength: [
-        5,
-        'A tour name must have at least 5 characters',
-      ],
+      maxlength: [40, 'A tour name must have at most 40 characters'],
+      minlength: [5, 'A tour name must have at least 5 characters'],
     },
     slug: String,
     duration: {
@@ -25,10 +19,7 @@ const tourSchema = new mongoose.Schema(
     },
     maxGroupSize: {
       type: Number,
-      required: [
-        true,
-        'A tour must have a maximum group size',
-      ],
+      required: [true, 'A tour must have a maximum group size'],
     },
     difficulty: {
       type: String,
@@ -36,8 +27,7 @@ const tourSchema = new mongoose.Schema(
       enum: {
         // enum is only fir strings
         values: ['easy', 'medium', 'difficult'],
-        message:
-          'difficulty must be either easy, medium, or difficult',
+        message: 'difficulty must be either easy, medium, or difficult',
       },
     },
     ratingsQuantity: {
@@ -61,8 +51,7 @@ const tourSchema = new mongoose.Schema(
           // this only points to current document on new document creation
           return val < this.price;
         },
-        message:
-          'Discount price ({VALUE}) must be below regular price',
+        message: 'Discount price ({VALUE}) must be below regular price',
       },
     },
     summary: {
@@ -122,10 +111,10 @@ tourSchema.pre(/^find/, function (next) {
 });
 
 tourSchema.post(/^find/, function (docs, next) {
-  console.log(
-    ` the time taken by the query is: ${Date.now() - this.startTime}`,
-  );
-  console.log(docs);
+  // console.log(
+  //   ` the time taken by the query is: ${Date.now() - this.startTime}`,
+  // );
+  // console.log(docs);
   next();
 });
 

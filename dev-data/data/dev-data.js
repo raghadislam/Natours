@@ -19,11 +19,7 @@ mongoose
   })
   .then(() => console.log('DB conneted!'));
 
-const data = JSON.parse(
-  fs.readFileSync(
-    `${__dirname}/tours-simple.json`,
-  ),
-);
+const data = JSON.parse(fs.readFileSync(`${__dirname}/tours-simple.json`));
 
 const importData = async () => {
   try {
