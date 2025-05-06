@@ -1,4 +1,3 @@
-// This File is for Application Setup
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 

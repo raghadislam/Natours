@@ -4,10 +4,6 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-// this is how we define paramterized middleware that only
-// get exuted when we rout for a url with these specific parameters
-// router.param('id', tourController.checkId);
-
 router
   .route('/top-5-cheap')
   .get(tourController.aliasTopTours, tourController.getAllTours);

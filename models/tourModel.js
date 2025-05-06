@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-// const validator = require('validator');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -25,7 +24,7 @@ const tourSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A tour must have a difficulty'],
       enum: {
-        // enum is only fir strings
+        // enum is only for strings
         values: ['easy', 'medium', 'difficult'],
         message: 'difficulty must be either easy, medium, or difficult',
       },
@@ -71,8 +70,8 @@ const tourSchema = new mongoose.Schema(
     images: [String],
     createdAt: {
       type: Date,
-      default: Date.now(), // in mongo this will be converted into todays date
-      select: false, // hide this one from the output
+      default: Date.now(),
+      select: false,
     },
     startDates: [Date],
     secretTour: {
@@ -90,20 +89,13 @@ tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
 
-// DOCUMENT MIDDLEWARE, this one runs before the .save() and .create() commands only
-// 'this' points to the current document
+// DOCUMENT MIDDLEWARE
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
 
-// tourSchema.post('save', (doc, next) => {
-//   console.log(doc);
-//   next();
-// });
-
-// QUERY MIDDLEWARE, this one runs before any query begins with find because of the regular exp
-// 'this' points to the current query
+// QUERY MIDDLEWARE
 tourSchema.pre(/^find/, function (next) {
   this.find({ secretTour: { $ne: true } });
   this.startTime = Date.now();
@@ -119,17 +111,13 @@ tourSchema.post(/^find/, function (docs, next) {
 });
 
 // AGGREGATION MIDDLEWARE
-// 'this' points to the current aggrigation object
 tourSchema.pre('aggregate', function (next) {
-  // unshift adds to the beginning of the array
   this.pipeline().unshift({
     $match: { secretTour: { $ne: true } },
   });
-  // console.log(this.pipeline());
   next();
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
-// Mongoose automatically converts it into a lowercase, plural collection name in MongoDB.
 
 module.exports = Tour;

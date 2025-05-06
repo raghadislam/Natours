@@ -41,7 +41,7 @@ class APIFeatures {
 
       this.query = this.query.select(fields);
     } else {
-      this.query = this.query.select('-__v'); // the - means execluding this argument
+      this.query = this.query.select('-__v');
     }
     return this;
   }

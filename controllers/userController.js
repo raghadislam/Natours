@@ -13,7 +13,6 @@ const filterObj = (obj, ...allowedFields) => {
 exports.getAllUsers = catchAsync(async (req, res) => {
   const allUser = await User.find();
 
-  // SEND RESPONSE
   res.status(200).json({
     status: 'success',
     results: allUser.length,
@@ -58,7 +57,6 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 
 exports.getUser = (req, res) => {
   res.status(500).json({
-    // 500 means internal server error
     status: 'error',
     message: 'this route is not yet defined',
   });
@@ -66,7 +64,6 @@ exports.getUser = (req, res) => {
 
 exports.createUser = (req, res) => {
   res.status(500).json({
-    // 500 means internal server error
     status: 'error',
     message: 'this route is not yet defined',
   });
@@ -74,7 +71,6 @@ exports.createUser = (req, res) => {
 
 exports.updateUser = (req, res) => {
   res.status(500).json({
-    // 500 means internal server error
     status: 'error',
     message: 'this route is not yet defined',
   });
@@ -82,7 +78,6 @@ exports.updateUser = (req, res) => {
 
 exports.deleteUser = (req, res) => {
   res.status(500).json({
-    // 500 means internal server error
     status: 'error',
     message: 'this route is not yet defined',
   });

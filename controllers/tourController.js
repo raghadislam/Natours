@@ -18,7 +18,6 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
     .paginate();
   const allTours = await feature.query;
 
-  // SEND RESPONSE
   res.status(200).json({
     status: 'success',
     results: allTours.length,
@@ -48,13 +47,11 @@ exports.getTour = catchAsync(async (req, res, next) => {
       tour,
     },
   });
-  // const id = req.params.id * 1;
-  // const tour = tours.find((el) => el.id === id);
 });
 exports.updateTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-    new: true, // return the updated and not the original
-    runValidators: true, // the validators (type validators for example), runs again after updating
+    new: true,
+    runValidators: true,
   });
 
   if (!tour) {
@@ -63,7 +60,7 @@ exports.updateTour = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      tour, // this is the same is this: tour: tour
+      tour,
     },
   });
 });
@@ -87,7 +84,6 @@ exports.getTourStats = catchAsync(async (req, res, next) => {
     {
       $group: {
         _id: { $toUpper: '$difficulty' },
-        // _id: { $toUpper: '$difficulty' },
         numTours: { $sum: 1 },
         numRatings: { $sum: '$ratingsQuantity' },
         avgRating: { $avg: '$ratingsAverage' },
