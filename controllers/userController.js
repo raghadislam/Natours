@@ -33,7 +33,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       ),
     );
   }
-  // 2) Filter out the unubdateable fields and update the user data
+  // 2) Filter out the unupdateable fields and update the user data
   const filteredObj = filterObj(req.body, 'name', 'email');
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredObj, {
     new: true,
@@ -45,6 +45,14 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     date: {
       user: updatedUser,
     },
+  });
+});
+
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, { active: false });
+  res.status(204).json({
+    status: 'success',
+    data: null,
   });
 });
 
