@@ -19,10 +19,12 @@ router
   .get(reviewController.getReview)
   .patch(
     authController.restrictTo('user', 'admin'),
+    reviewController.checkIfAuthor,
     reviewController.updateReview,
   )
   .delete(
     authController.restrictTo('user', 'admin'),
+    reviewController.checkIfAuthor,
     reviewController.deleteReview,
   );
 module.exports = router;
