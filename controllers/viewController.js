@@ -17,12 +17,14 @@ exports.getTour = catchAsync(async (req, res, next) => {
     fields: ' review rating user',
   });
 
-  //   if (!doc) {
-  //     return next(new AppError('No document found with that ID', 404));
-  //   }
-
   res.status(200).render('tour', {
     title: `${tour.name} Tour`,
     tour,
   });
 });
+
+exports.getLoginForm = (req, res) => {
+  res.status(200).render('login', {
+    title: `Log into your account`,
+  });
+};
