@@ -31,7 +31,12 @@ const styleSrcUrls = [
   'https://tile.openstreetmap.org',
   'https://fonts.googleapis.com/',
 ];
-const connectSrcUrls = ['https://unpkg.com', 'https://tile.openstreetmap.org'];
+const connectSrcUrls = [
+  'https://unpkg.com',
+  'https://tile.openstreetmap.org',
+  'ws://localhost:*', // Allow local WebSockets
+  'ws://127.0.0.1:*', // Allow localhost WebSockets
+];
 const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 
 app.use(
@@ -91,7 +96,7 @@ app.use(
 // a Middleware to set the request time in the request object
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  console.log(req.cookies);
+  // console.log(req.cookies);
 
   next();
 });
