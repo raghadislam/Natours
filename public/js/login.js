@@ -35,6 +35,8 @@ export const logout = async () => {
     if (res.data.status === 'success') {
       if (window.location.href === 'http://127.0.0.1:3000/me')
         location.assign('/');
+      else if (window.location.href === 'http://127.0.0.1:3000/my-tours')
+        location.assign('/');
       else location.reload(true);
       // console.log(window.location.href);
     }
