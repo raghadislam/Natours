@@ -33,8 +33,11 @@ export const logout = async () => {
       url: '/api/v1/users/logout',
     });
     if (res.data.status === 'success') {
-      if (window.location.href === '/me') location.assign('/');
-      else if (window.location.href === '/my-tours') location.assign('/');
+      const currentPath = new URL(window.location.href).pathname;
+      console.log(currentPath);
+
+      if (currentPath === '/me') location.assign('/');
+      else if (currentPath === '/my-tours') location.assign('/');
       else location.reload(true);
     }
   } catch (err) {
