@@ -13,6 +13,7 @@ router.get(
 );
 router.get('/tour/:slug', authController.isLoggedin, viewController.getTour);
 router.get('/login', authController.isLoggedin, viewController.getLoginForm);
+router.get('/signup', authController.isLoggedin, viewController.getSignupForm);
 router.get('/me', authController.protect, viewController.getAccount);
 router.get('/my-tours', authController.protect, viewController.getMyTours);
 
