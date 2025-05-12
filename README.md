@@ -5,8 +5,15 @@
 [![Stripe](https://img.shields.io/badge/Stripe-Payments-blueviolet)](https://stripe.com/)
 [![Deployed on Railway](https://img.shields.io/badge/Deployed-Railway-6441a5)](https://railway.app)
 
+
+Natours is a full-stack web application featuring a RESTful API and a server-side rendered website designed for booking tours.
+
 ✅ **RESTful API Backend** (Node.js/Express)  
-✅ **Client-Side Rendered Website** (Vanilla JS + Webpack)  
+✅ **Client-Side Rendered Website** (Vanilla JS + Pug templates + CSS)  
+✅ **Dtabase** (MongoDB with Mongoose for ORM)  
+
+## 🌍 Live Demo
+<a href="https://natours-raghad.up.railway.app/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Deployed_on-Railway-6441a5?logo=railway" alt="Railway"></a>
 
 ## 🏗️ System Overview
 
@@ -64,6 +71,9 @@ A fully compliant REST API built with Express.js featuring:
   - Resizing to 500x500
   - Format conversion to JPEG
   - Quality optimization
+
+## API Documentation
+<a href="https://documenter.getpostman.com/view/43487895/2sB2jAb7qR" target="_blank" rel="noreferrer"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman"></a>
 
 
 ## 🚀 Quick Start
