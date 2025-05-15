@@ -34,14 +34,12 @@ export const logout = async () => {
     });
     if (res.data.status === 'success') {
       const currentPath = new URL(window.location.href).pathname;
-      console.log(currentPath);
 
       if (currentPath === '/me') location.assign('/');
       else if (currentPath === '/my-tours') location.assign('/');
       else location.reload(true);
     }
   } catch (err) {
-    console.log(err.response);
     showAlert('error', 'Error logging out! Please try again.');
   }
 };
