@@ -84,6 +84,6 @@ if (signupForm) {
   });
 }
 
-if (alertMessage) {
+if (alertMessage && alertMessage.dataset.alert) {
   successBooking(alertMessage.dataset.alert);
 }
