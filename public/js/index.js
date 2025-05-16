@@ -2,7 +2,7 @@ import { login, logout } from './login';
 import { signup } from './signup';
 import { displayMap } from './leaflet';
 import { updateSettings } from './updateSettings';
-import { bookTour } from './stripe';
+import { bookTour, successBooking } from './stripe';
 
 // DOM ELEMENTS
 const MapPage = document.getElementById('map');
@@ -12,6 +12,7 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const signupForm = document.querySelector('.form--signup');
+const alertMessage = document.querySelector('body');
 
 // VALUES
 
@@ -81,4 +82,8 @@ if (signupForm) {
 
     signup(name, email, password, passwordConfirm);
   });
+}
+
+if (alertMessage) {
+  successBooking(alertMessage.dataset.alert);
 }

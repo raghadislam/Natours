@@ -18,6 +18,10 @@ export const bookTour = async (tourId) => {
       sessionId: session.data.session.id,
     });
   } catch (err) {
-    showAlert('Error', err);
+    showAlert('error', err);
   }
+};
+
+export const successBooking = (message) => {
+  showAlert('success', message);
 };
