@@ -17,10 +17,6 @@ Natours is a full-stack web application featuring a RESTful API and a server-sid
 ✅ **Client-Side Rendered Website** (Vanilla JS + Pug templates + CSS)  
 ✅ **Dtabase** (MongoDB with Mongoose for ORM)
 
-## 🌍 Live Demo
-
-<a href="https://natours-raghad.up.railway.app/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Deployed_on-Railway-6441a5?logo=railway" alt="Railway"></a>
-
 ## 🏗️ System Overview
 
 ### 1. RESTful API (Backend)
